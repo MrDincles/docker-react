@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: . # 어느 디렉토리의 파일과 폴더를 이용할지 경로 명시
+      dockerfile: Dockerfile.dev # 이미지 만들때 쓰일 dockerfile파일명시
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    command: ["npm", "run", "test"]
